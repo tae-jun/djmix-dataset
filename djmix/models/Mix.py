@@ -1,6 +1,6 @@
 import logging
 import traceback
-from djmix import utils, config, alignment, cvxopt
+from djmix import utils, config
 from .Audio import Audio
 from .Track import Track
 from ..download import download_mix
@@ -40,12 +40,15 @@ class Mix(Audio):
         traceback.print_exc()
   
   def align(self, **kwargs):
+    from djmix.tools import alignment
     return alignment.align(self, **kwargs)
   
   def transitions(self):
+    from djmix.tools import alignment
     return alignment.transitions(self)
   
   def cvxopt(self, **kwargs):
+    from djmix.tools import cvxopt
     return cvxopt.optimize(self, **kwargs)
   
   @property

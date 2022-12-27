@@ -1,4 +1,5 @@
 import os
+import gzip
 import json
 import logging
 
@@ -9,10 +10,11 @@ from .models import Mix
 def bootstrap():
   logging.basicConfig(level=logging.INFO)
   
-  metadata_path = utils.mkpath(os.path.dirname(__file__), '../dataset/djmix-dataset.json')
-  assert os.path.isfile(metadata_path), f'djmix-dataset.json does not exist at: {metadata_path}'
+  metadata_path = utils.mkpath(os.path.dirname(__file__), '../dataset/djmix-dataset.json.gz')
+  assert os.path.isfile(metadata_path), f'djmix-dataset.json.gz does not exist at: {metadata_path}'
   
-  json_mixes = json.load(open(metadata_path))
+  with gzip.open(metadata_path) as f:
+    json_mixes = json.load(f)
   
   data_dir = config.get_root()
   mixes = [

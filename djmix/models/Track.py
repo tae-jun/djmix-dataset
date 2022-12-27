@@ -18,4 +18,4 @@ class Track(Audio):
   def path(self) -> Optional[str]:
     if self.id is None:
       return None
-    return utils.mkpath(config.get_root(), 'tracks', self.id[0], f'{self.id}.mp3')
+    return utils.mkpath(config.get_root(), 'tracks', f'{self.id}.mp3')
